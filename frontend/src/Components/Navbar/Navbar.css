@@ -1,0 +1,113 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #141414;
+    color: white;
+}
+
+.navbar-brand .logo {
+    height: 50px;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-input-group {
+    display: flex;
+    background-color: #454545;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.search-type {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-input {
+    flex-grow: 1;
+    border: none;
+    padding: 8px 10px;
+    color: white;
+    background-color: transparent;
+}
+
+.search-icon {
+    padding: 8px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.logout-button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #f6121D;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .navbar-brand .logo,
+    .navbar-links,
+    .navbar-actions {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .search-bar,
+    .search-input,
+    .search-icon {
+        width: 100%;
+    }
+}
+
+.search-status {
+    color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #333; /* Adjust as needed */
+    padding: 10px;
+    text-align: center;
+    border-radius: 0 0 4px 4px;
+}

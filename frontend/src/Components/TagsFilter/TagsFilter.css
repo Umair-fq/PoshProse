@@ -1,0 +1,37 @@
+.tags-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+    background-color: #2A2D34; /* Dark background for contrast */
+  }
+  
+  .tag-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .tag-checkbox {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  .tag-label {
+    cursor: pointer;
+    background-color: #4CAF50; /* Vibrant Green */
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .tag-label:hover {
+    background-color: #43A047; /* Darker shade for hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+  
+  .tag-checkbox:checked + .tag-label {
+    background-color: #FFC107; /* Highlight color for selected */
+    color: #2A2D34; /* Dark text for contrast */
+  }
+  

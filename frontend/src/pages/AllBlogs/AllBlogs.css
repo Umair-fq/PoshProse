@@ -1,0 +1,82 @@
+/* .blogs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f4f7fa; /* Light grayish-blue background */
+}
+
+.blog-link {
+    text-decoration: none;
+    color: inherit; /* Ensures text color is not affected by link styling */
+}
+
+.blog-card {
+    width: 100%;
+    max-width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #e1e4e8; /* Subtle border */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure consistent spacing */
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover for a "lifted" effect */
+}
+
+.blog-title {
+    color: #2a41e8; /* Deep serene blue */
+    margin: 0 0 10px;
+    font-size: 20px; /* Larger font size for titles */
+}
+
+.blog-summary {
+    font-size: 14px;
+    color: #4a4a4a; /* Darker gray for better readability */
+    margin-bottom: 15px;
+}
+
+.blog-info {
+    font-size: 12px;
+    color: #9b9b9b; /* Light gray for info */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-date {
+    color: #e85a4f; /* Warm red accent for dates */
+}
+
+.blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.blog-tag {
+    display: inline-block;
+    background-color: #007bff; /* Vibrant background color for individual tag */
+    color: #ffffff; /* White text for better contrast */
+    border-radius: 16px; /* Rounded edges for a pill-like shape */
+    padding: 5px 10px; /* Padding inside the tag */
+    margin: 0 5px 5px 0; /* Margin around the tag for spacing */
+    font-size: 12px; /* Font size for the tag */
+    white-space: nowrap; /* Prevents the tag from breaking into multiple lines */
+    overflow: hidden; /* Prevents content from spilling outside the tag */
+    text-overflow: ellipsis; /* Adds an ellipsis if the tag text is too long */
+}
+
+
+.blog-tag:hover {
+    background-color: #007bff; /* Change color on hover for interactive feel */
+    color: #ffffff;
+} */

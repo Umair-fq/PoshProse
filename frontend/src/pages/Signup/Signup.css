@@ -1,0 +1,117 @@
+/* Microsoft Edge and Internet Explorer */
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+.error-message {
+    color: #ff0000; /* Red color for errors */
+    background-color: #ffecec; /* Light red background */
+    border: 1px solid #ffacad; /* Border color */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #F8F9FA;
+    height: 100vh; /* Full viewport height */
+}
+
+.signup-title {
+    color: #212529;
+    margin-bottom: 2rem;
+}
+
+.signup-form {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: white;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 2px solid #dee2e6;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #495057;
+}
+
+.form-control:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border-color: #007BFF;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+.btn-secondary {
+    background-color: #6C757D;
+    border-color: #6C757D;
+    color: white;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+    border-color: #4e555b;
+}
+
+.login-redirect {
+    margin-top: 1.5rem;
+    font-size: 16px;
+    color: #6C757D;
+}
+
+.show-password-button {
+    background: none;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px; /* Adjust as needed to align with your input field */
+}
+
+
+@media (max-width: 768px) {
+    .signup-form {
+        width: 90%;
+    }
+}

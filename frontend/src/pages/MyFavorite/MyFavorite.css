@@ -1,0 +1,7 @@
+.blog-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjust based on your design */
+    gap: 20px; /* Spacing between cards */
+  }
+  

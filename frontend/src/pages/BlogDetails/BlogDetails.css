@@ -1,0 +1,121 @@
+.blog-detail {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.blog-title {
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+/* Styling for tags to appear as individual "chips" */
+.blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.blog-tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 2px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Enhancements to the blog-info section for alignment and spacing */
+.blog-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.blog-date, .blog-author {
+    background: #f4f4f4;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.blog-meta {
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.blog-content {
+    line-height: 1.6;
+}
+
+.blog-summary {
+    font-style: italic;
+    color: #555;
+}
+
+
+.edit-button, .delete-button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.edit-button {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336; /* Red background */
+    color: white;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #333; /* Dark background for hover state */
+    color: #fff;
+    transform: translateY(-2px); /* Slight raise effect on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .edit-button, .delete-button {
+        padding: 8px 12px; /* Slightly smaller padding on smaller screens */
+        font-size: 14px; /* Adjust font size for better readability */
+    }
+}
+
+
+/* Responsive typography */
+@media (max-width: 768px) {
+    .blog-detail {
+        padding: 15px;
+    }
+
+    .blog-title {
+        font-size: 24px;
+    }
+}
