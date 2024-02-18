@@ -1,5 +1,5 @@
 const express = require('express');
-const { createBlog, getBlog, editBlog, deleteBlog, searchBlog, blogsByTags, myBlogs, checkBlogOwner } = require('../Controllers/BlogController');
+const { createBlog, getBlog, editBlog, deleteBlog, searchBlog, blogsByTags, myBlogs, checkBlogOwner, addComment, editComment, deleteComment } = require('../Controllers/BlogController');
 const { authenticateToken } = require('../Middlewares/Auth')
 const router = express.Router();
 
@@ -11,4 +11,7 @@ router.get('/myblogs', authenticateToken, myBlogs)
 router.get('/:id', getBlog);
 router.put('/update/:blogId', authenticateToken, editBlog)
 router.delete('/delete/:blogId', authenticateToken, deleteBlog)
+router.put('/addComment/:blogId', authenticateToken, addComment)
+router.put('/:blogId/editComment/:commentIndex', authenticateToken, editComment)
+router.delete('/:blogId/delete/:commentIndex', authenticateToken, deleteComment)
 module.exports = router;

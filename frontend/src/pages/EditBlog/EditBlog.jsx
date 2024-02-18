@@ -67,7 +67,7 @@ const EditBlog = () => {
         <>
             <Navbar />
             <div className="add-blog-container">
-            <h1>Add Blog</h1>
+            <h1>Edit Blog</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <input type="text" name="title" placeholder="Enter title" value={formData.title} onChange={handleChange} />

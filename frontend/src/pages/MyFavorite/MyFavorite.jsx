@@ -5,7 +5,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import './MyFavorite.css'
 const MyFavorite = () => {
     const { userFavorites } = useContext(UserContext);
-    console.log('my fav: ', userFavorites)
+    // console.log('my fav: ', userFavorites)
   return (
     <>
         <Navbar />

@@ -38,7 +38,9 @@ const createBlog = async (req, res) => {
 
 const getBlog = async (req, res) => {
     try {
-        const blog = await Blog.findById(req.params.id).populate('author', 'username email');
+        const blog = await Blog.findById(req.params.id)
+        .populate('author', 'username email')
+        .populate('comments.author', 'username');
         if(!blog) {
             return res.status(404).json({message: "Blog not found"});
         }
@@ -171,4 +173,86 @@ const checkBlogOwner = async (req, res, next) => {
     }
 }
 
-module.exports = { createBlog, getBlog, editBlog, deleteBlog, searchBlog, blogsByTags, myBlogs, checkBlogOwner}
+const addComment = async (req, res) => {
+    try {
+        const { comment } = req.body;
+        const userId = req.user.user._id;
+        const blogId = req.params.blogId;
+
+
+        // Find the blog by ID
+        const blog = await Blog.findById(blogId).populate('author', 'username');
+        // console.log('Populated blog:', blog); // Log the populated blog object
+
+        if (!blog) {
+            return res.status(404).json({ message: "Blog not found" });
+        }
+
+        // crete a new comment object
+        const newComment = {
+            author: userId,
+            comment: comment
+        }
+
+        // Add the new comment to the comments array
+        blog.comments.push(newComment)
+
+        // save the blog
+        const updatedBlog = await blog.save();
+        
+        return res.status(201).json(updatedBlog);
+    } catch(err) {
+        return res.status(500).json({message: "Internal server error"})
+    }
+}
+
+const editComment = async (req, res) => {
+    try {
+        const { comment } = req.body;  
+        const { blogId, commentIndex } = req.params;
+        const userId = req.user.user._id;
+
+        const blog = await Blog.findById(blogId);
+        if(!blog) {
+            return res.status(404).json({message: "Blog not found"})
+        } 
+        if (userId.toString() !== blog.author.toString()) {
+            return res.status(403).json({ message: "User not authorized to delete this blog" });
+        }
+        if (commentIndex < 0 || commentIndex >= blog.comments.length) {
+            return res.status(404).json({ message: "Invalid comment index" });
+        }
+        blog.comments[commentIndex].comment = comment;
+        const updatedBlog = await blog.save();
+        return res.status(200).json(updatedBlog);
+    } catch (error) {
+        return res.status(501).json({message: "Internal Server error: ", error})
+    }
+}
+
+const deleteComment = async (req, res) => {
+    try {
+        console.log('delete fun')
+        const { blogId, commentIndex } = req.params;
+        const userId = req.user.user._id;
+
+        const blog = await Blog.findById(blogId);
+        if(!blog) {
+            return res.status(404).json({message: "Blog not found"})
+        } 
+        if (userId.toString() !== blog.author.toString()) {
+            return res.status(403).json({ message: "User not authorized to delete this blog" });
+        }
+        if (commentIndex < 0 || commentIndex >= blog.comments.length) {
+            return res.status(404).json({ message: "Invalid comment index" });
+        }
+        //delete comment from the array of objects os comments
+        blog.comments.splice(commentIndex, 1);
+        await blog.save();
+        return res.status(200).json({message: "blog deleted successfully"});
+    } catch (error) {
+        return res.status(501).json({message: "Internal Server error: ", error})
+    }
+}
+
+module.exports = { createBlog, getBlog, editBlog, deleteBlog, searchBlog, blogsByTags, myBlogs, checkBlogOwner, addComment, editComment, deleteComment}

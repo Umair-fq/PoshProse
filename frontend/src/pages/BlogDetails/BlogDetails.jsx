@@ -8,6 +8,7 @@ import useFavorites from '../../Components/CustomHooks/UseFavorites';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'; // for non-favorite
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'; // for favorite
+import CommentSection from '../../Components/Comment/CommentSection';
 
 
 const BlogDetail = () => {
@@ -70,7 +71,7 @@ const BlogDetail = () => {
                 {blog.summary && <p className="blog-summary">{blog.summary}</p>}
                 <div dangerouslySetInnerHTML={{ __html: blog.content }}></div> {/* Assuming HTML content; sanitize in production */}
             </section>
-            {/* Likes and comments rendering not included, assuming functionality */}
+            <CommentSection blogId={blog._id}/>
         </article>
         </>
     );
