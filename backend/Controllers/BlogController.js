@@ -157,22 +157,6 @@ const editBlog = async (req, res) => {
     }
     
 
-    // middleware for checking that the current user and the blog owner
-const checkBlogOwner = async (req, res, next) => {
-    try {
-        const blog = await Blog.find(req.params.id);
-        if (!blog) {
-            return res.status(404).json({ message: "Blog not found"})
-        }
-        if (blog.author.toString() !== req.user.user._id.toString()) {
-            return res.status(404).json({ message: "User not authorized"})
-        }
-        next();
-    } catch(err) {
-        return res.status(500).json({message: "Server error", error: err.message})
-    }
-}
-
 const addComment = async (req, res) => {
     try {
         const { comment } = req.body;
@@ -215,10 +199,9 @@ const editComment = async (req, res) => {
         const blog = await Blog.findById(blogId);
         if(!blog) {
             return res.status(404).json({message: "Blog not found"})
-        } 
-        if (userId.toString() !== blog.author.toString()) {
-            return res.status(403).json({ message: "User not authorized to delete this blog" });
         }
+        
+        
         if (commentIndex < 0 || commentIndex >= blog.comments.length) {
             return res.status(404).json({ message: "Invalid comment index" });
         }
@@ -232,7 +215,6 @@ const editComment = async (req, res) => {
 
 const deleteComment = async (req, res) => {
     try {
-        console.log('delete fun')
         const { blogId, commentIndex } = req.params;
         const userId = req.user.user._id;
 
@@ -240,9 +222,7 @@ const deleteComment = async (req, res) => {
         if(!blog) {
             return res.status(404).json({message: "Blog not found"})
         } 
-        if (userId.toString() !== blog.author.toString()) {
-            return res.status(403).json({ message: "User not authorized to delete this blog" });
-        }
+        
         if (commentIndex < 0 || commentIndex >= blog.comments.length) {
             return res.status(404).json({ message: "Invalid comment index" });
         }
@@ -255,4 +235,55 @@ const deleteComment = async (req, res) => {
     }
 }
 
-module.exports = { createBlog, getBlog, editBlog, deleteBlog, searchBlog, blogsByTags, myBlogs, checkBlogOwner, addComment, editComment, deleteComment}
+const handleLikeBlog = async (req, res) => {
+    try {
+        const { blogId } = req.params;
+        const userId = req.user.user._id;
+        const blog = await Blog.findById(blogId);
+        if(!blog){
+            return res.status(404).json({message: "blog not found"})
+        }
+        const userLiked = blog.likes.includes(userId);
+        const userDisLiked = blog.dislikes.includes(userId);
+        if(userLiked){
+            blog.likes.pull(userId); //Remove like
+        } else {
+            if(userDisLiked){
+                blog.dislikes.pull(userId); //Remove dis-like
+            } 
+            blog.likes.push(userId); //Add like
+        }
+        const updatedBlog = await blog.save();
+        return res.status(201).json(updatedBlog)
+    } catch (error) {
+        return res.status(501).json({message: "Internal Server error: ", error})
+    }
+}
+
+
+const handleDisLikeBlog = async (req, res) => {
+    try {
+        const {blogId} = req.params;
+        const userId = req.user.user._id;
+        const blog = await Blog.findById(blogId);
+        if(!blog){
+            return res.status(404).json({message: "blog not found"})
+        }
+        const userLiked = blog.likes.includes(userId);
+        const userDisLiked = blog.dislikes.includes(userId);
+        if(userDisLiked){
+            blog.dislikes.pull(userId); //Remove dis-like
+        } else {
+            if(userLiked){
+                blog.likes.pull(userId); //Remove like
+            }
+            blog.dislikes.push(userId); //Add dis-like
+        }
+        const updatedBlog = await blog.save();
+        return res.status(201).json(updatedBlog)
+    } catch (error) {
+        return res.status(501).json({message: "Internal Server error: ", error})
+    }
+}
+
+module.exports = { createBlog, getBlog, editBlog, deleteBlog, searchBlog, blogsByTags, myBlogs, addComment, editComment, deleteComment, handleLikeBlog, handleDisLikeBlog}

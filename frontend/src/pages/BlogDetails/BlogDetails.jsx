@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'; // for non-favorite
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'; // for favorite
 import CommentSection from '../../Components/Comment/CommentSection';
+import LikeDisLike from '../../Components/LikeDisLike/LikeDisLike';
 
 
 const BlogDetail = () => {
@@ -67,6 +68,8 @@ const BlogDetail = () => {
                 icon={isFavorite(blog._id) ? fasHeart : farHeart}
                 className={`favorite-icon ${isFavorite(blog._id) ? 'favorited' : ''}`}
             />
+
+            <LikeDisLike blogId={blog._id}/>
                 
                 {blog.summary && <p className="blog-summary">{blog.summary}</p>}
                 <div dangerouslySetInnerHTML={{ __html: blog.content }}></div> {/* Assuming HTML content; sanitize in production */}

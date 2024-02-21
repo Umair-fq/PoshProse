@@ -86,7 +86,6 @@ const addToFavorites = async(req, res) => {
     try{
         const { blogId } = req.params;
         const  userId  = req.user.user._id;
-        console.log('user id: ', userId)
         const user = await User.find({userId});
         if (!user) {
             return res.status(404).json({message: "User not found"})

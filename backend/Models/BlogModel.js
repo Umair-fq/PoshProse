@@ -29,6 +29,10 @@ const BlogSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     }],
+    dislikes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }],
     comments: [{
         author: {
             type: Schema.Types.ObjectId,

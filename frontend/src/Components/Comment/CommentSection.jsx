@@ -63,7 +63,7 @@ const CommentSection = ({ blogId }) => {
 
     return (
         <div className='comment-section'>
-            <h2 className="section-title">Comments</h2>
+            <h2 className="section-title">Comments ({comments.length})</h2>
             <div className="comment-input">
                 <textarea
                     name="comment"

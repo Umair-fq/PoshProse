@@ -1,0 +1,42 @@
+/* Container styling */
+.like-dislike-container {
+  display: flex;
+  justify-content: center; /* Align buttons horizontally */
+  align-items: center;
+  width: 100%;
+}
+
+/* Button styling */
+.like-dislike-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 10px; /* Add space between buttons */
+  font-size: 20px; /* Enlarge button size */
+}
+
+/* Icon styling */
+.like-dislike-icon {
+  margin-right: 5px;
+}
+
+/* Count styling */
+.like-dislike-count {
+  margin-left: 5px;
+  font-size: 20px; /* Enlarge count size */
+  font-weight: bold;
+}
+
+/* Like button specific styling */
+.like-dislike-button.liked {
+  color: green;
+}
+
+/* Dislike button specific styling */
+.like-dislike-button.disliked {
+  color: red;
+}
