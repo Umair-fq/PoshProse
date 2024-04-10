@@ -8,6 +8,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+# Ignore .env files
+**/.env
+
+# Ignore node_modules directory
+**/node_modules/
 dist
 dist-ssr
 *.local

@@ -194,7 +194,6 @@ const editComment = async (req, res) => {
     try {
         const { comment } = req.body;  
         const { blogId, commentIndex } = req.params;
-        const userId = req.user.user._id;
 
         const blog = await Blog.findById(blogId);
         if(!blog) {
@@ -205,6 +204,8 @@ const editComment = async (req, res) => {
         if (commentIndex < 0 || commentIndex >= blog.comments.length) {
             return res.status(404).json({ message: "Invalid comment index" });
         }
+
+
         blog.comments[commentIndex].comment = comment;
         const updatedBlog = await blog.save();
         return res.status(200).json(updatedBlog);
@@ -215,8 +216,7 @@ const editComment = async (req, res) => {
 
 const deleteComment = async (req, res) => {
     try {
-        const { blogId, commentIndex } = req.params;
-        const userId = req.user.user._id;
+        let { blogId, commentIndex } = req.params;
 
         const blog = await Blog.findById(blogId);
         if(!blog) {

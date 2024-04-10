@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
         return res.status(400).json({ message: "User already exists with given username or email"});
     } else {
         if(!validator.isStrongPassword(password)) {
-            return res.status(400).json({ message: "Password is not weak"});
+            return res.status(400).json({ message: "Password is weak"});
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({

@@ -1,8 +1,90 @@
-.error-message {
-    color: #ff0000; /* Red color for errors */
-    background-color: #ffecec; /* Light red background */
-    border: 1px solid #ffacad; /* Border color */
-    padding: 10px;
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f4f7fc;
+}
+
+.login-container {
+    padding: 40px;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 360px;
+}
+
+.login-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.login-error {
+    color: #d9534f;
+    margin-bottom: 20px;
+}
+
+.login-form .input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px 20px;
     border-radius: 5px;
-    margin: 10px 0;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.login-button {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.google-button-container {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.redirect-section {
+    text-align: center;
+    font-size: 14px;
+}
+
+.redirect-section span {
+    color: #6c757d;
+}
+
+.redirect-section a {
+    color: #0056b3;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .login-container {
+        padding: 20px;
+    }
 }

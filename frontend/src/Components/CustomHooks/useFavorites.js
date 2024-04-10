@@ -7,8 +7,7 @@ const useFavorites  = () => {
 
   const toggleFavorite = async (blog) => {
     const isCurrentlyFavorite = userFavorites.some(favorite => favorite._id === blog._id)
-    const apiUrl = `http://localhost:8080/api/user/${isCurrentlyFavorite ? 'remFromFav' : 'addToFav'}/${blog._id}`
-
+    const apiUrl = `http://localhost:8080/${isCurrentlyFavorite ? 'remFromFav' : 'addToFav'}/${blog._id}`
 
     //updating the UI
     const updatedFavorites = isCurrentlyFavorite

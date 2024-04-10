@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Signup.css'; // Make sure to update the CSS file based on the new styles provided below
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,16 +13,18 @@ const Signup = () => {
     const [bio, setBio] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/api/user/signup', {
+        axios.post('http://localhost:8080/signup', {
             username,
             email,
             password,
             bio
-        }).then(response => {
-            console.log('Signup Success', response.data);
+        }).then(() => {
+            navigate('/login')
+            // console.log('Signup Success', response.data);
         }).catch(error => {
             // console.error('Signup Error', error);
             if (error.response && error.response.data.message) {

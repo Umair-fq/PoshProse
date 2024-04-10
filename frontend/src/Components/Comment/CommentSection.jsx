@@ -89,7 +89,7 @@ const CommentSection = ({ blogId }) => {
                                     <button className="options-button" onClick={() => handleToggleOptionsMenu(index)}>&#8942;</button>
                                     <div className="options-dropdown">
                                         <button onClick={() => navigate(`/${blogId}/editComment/${index}`)}>Edit</button>
-                                        <button onClick={handleDelete}>Delete</button>
+                                        <button onClick={() => handleDelete(index)}>Delete</button>
                                     </div>
                                 </div>
                             )}

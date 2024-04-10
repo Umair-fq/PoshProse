@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './Navbar.css';
-import logo from '../../assets/logo.webp'; // Adjust the path as necessary
+import logo from '../../assets/logo.jpg'; // Adjust the path as necessary
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';

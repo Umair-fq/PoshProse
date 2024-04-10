@@ -14,8 +14,12 @@ const UserSchema = new Schema ({
     },
     password: {
         type: String,
-        required: true,
     },
+    googleId: { 
+        type: String, 
+        unique: true, 
+        sparse: true 
+    }, // Unique if not null
     bio: {
         type: String,
     }, 
