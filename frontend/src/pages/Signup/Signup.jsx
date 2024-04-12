@@ -13,6 +13,7 @@ const Signup = () => {
     const [bio, setBio] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const [msg, setMsg] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -22,8 +23,14 @@ const Signup = () => {
             email,
             password,
             bio
-        }).then(() => {
-            navigate('/login')
+        }).then((res) => {
+            setMsg(res.data);
+            // Clear form fields by resetting state variables
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            setBio('');
+            // navigate('/login')
             // console.log('Signup Success', response.data);
         }).catch(error => {
             // console.error('Signup Error', error);
@@ -38,6 +45,7 @@ const Signup = () => {
     return (
         <div className="signup-container">
             {error && <div className="error-message">{error}</div>}
+            {msg && <div className='success_msg'>{msg}</div>}
             <h1 className="signup-title">Signup</h1>
             <form className="signup-form" onSubmit={handleSubmit}>
                 <div className="form-group">

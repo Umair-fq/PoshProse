@@ -20,7 +20,8 @@ passport.use(new GoogleStrategy({
             user = new User({
                 username: profile.displayName,
                 email: email, // Safely access the email
-                googleId: profile.id
+                googleId: profile.id,
+                isVerified: true
             });
             await user.save();
         }

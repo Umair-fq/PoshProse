@@ -1,0 +1,43 @@
+.loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* Adjust based on where you're using it */
+}
+
+.loading-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    /* Use your application's primary color */
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.loading-text {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #007bff;
+    /* Match your application's text color */
+    font-family: Arial, sans-serif;
+    /* Use your application's font */
+}

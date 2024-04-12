@@ -23,10 +23,16 @@ const UserSchema = new Schema ({
     bio: {
         type: String,
     }, 
-    status: { // Possible values: 'active', 'inactive', 'banned'
-        type: String, 
-        default: 'active' 
+    isVerified: { 
+        type: Boolean, 
+        default: false 
     }, 
+    emailVerificationToken: {
+        type: String
+    },
+    emailVerificationTokenExpires: {
+        type: Date
+    },
     favorites: [{
         type: Schema.Types.ObjectId,
         ref: 'Blog'

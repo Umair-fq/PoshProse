@@ -13,6 +13,7 @@ import { UserContextProvider } from './Components/Context/UserContextProvider'
 import MyFavorite from './pages/MyFavorite/MyFavorite'
 import EditComment from './Components/EditComment/EditComment'
 import AuthHandler from './Components/Auth/AuthHandler'
+import EmailVerify from './Components/EmailVerify/EmailVerify'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
     <>
       <UserContextProvider>
         <Routes>
+          <Route exact path = '/verify-email/' element = {<EmailVerify />}/>
           <Route exact path = '/login' element = {<Login />}/>
           <Route exact path = '/signup' element = {<Signup />}/>
           <Route exact path = '/' element = {<Home />}/>

@@ -1,8 +1,10 @@
 const User = require('../Models/UserModel')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto')
 const validator = require('validator');
 const Blog = require('../Models/BlogModel');
+const sendEmail = require('../utils/SendEmail')
 
 require('dotenv').config();
 
@@ -32,19 +34,55 @@ const registerUser = async (req, res) => {
             bio
         })
         if(user) {
-            // using 201 Created status code
-            return res.status(201).json({
-                _id: user._id, // It's common to use _id for MongoDB documents
-                username: user.username,
-                email: user.email,
-                // Optionally include other non-sensitive fields you want to return
-            })
+            
+            // Generate a verification token
+            const verificationToken = crypto.randomBytes(32).toString('hex');
+            user.emailVerificationToken = verificationToken;
+            user.emailVerificationTokenExpires = Date.now() + 3600000; // 1 hour from now
+            await user.save();
+
+            // send verification email
+            const verificationUrl = `http://localhost:5173/verify-email?token=${verificationToken}&id=${user._id}`;
+            await sendEmail(user.email, "Verify your email", `Please click on the following link to verify your email: ${verificationUrl}`)
+            res.status(200).send("User registered successfully. Please check your email to verify your account.")
         } else {
             // Handle the unlikely case where user creation failed silently
             return res.status(500).json({ message: "Failed to create user"});
         }
     }
 }
+
+const verifyEmailToken = async (req, res) => {
+    const { token, id } = req.params;
+
+    try {
+        const user = await User.findOne({  _id: id });
+
+        // Check if user is found
+        if (user) {
+            if(user.emailVerificationToken === token) {
+                 // Check if the token has expired
+                if (user.emailVerificationTokenExpires < Date.now()) {
+                    return res.status(400).json({ message: "This token has expired. Please request a new verification email." });
+                }
+
+                // Proceed with email verification since token is valid and not expired
+                user.isVerified = true;
+                user.emailVerificationToken = null;
+                user.emailVerificationTokenExpires = null;
+
+                await user.save(); // Wait for the save operation to complete before proceeding
+                res.json({ message: "Email verified successfully!" });
+
+            }
+        } else {
+            return res.status(400).json({ message: "User not found or invalid token." });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "An error occurred while verifying the email." });
+    }
+};
+
 
 const loginUser = async (req, res) => {
     const {email, password} = req.body;
@@ -55,6 +93,9 @@ const loginUser = async (req, res) => {
     if(user) {
         const comparePassword = await bcrypt.compare(password, user.password);
         if(comparePassword) {
+            if (!user.isVerified) {
+                return res.status(401).json({ message: "Check email! Please verify your email before logging in." });
+            }
             const accessToken = jwt.sign({
                 user: {
                     _id: user._id,
@@ -139,4 +180,4 @@ const getUserFavoriteBlogs = async (req, res) => {
         return res.status(500).json({error: error.message});
     }
 }
-module.exports = { registerUser, loginUser, addToFavorites, removeFromFavorites, getUserFavoriteBlogs }
+module.exports = { registerUser, loginUser, addToFavorites, removeFromFavorites, getUserFavoriteBlogs, verifyEmailToken }
