@@ -13,7 +13,7 @@ const authenticateToken = (req, res, next) => {
         if(err) {
             return res.sendStatus(403); // Invalid token
         }
-        req.user = user;
+        req.user = user
         next();
     })
 }

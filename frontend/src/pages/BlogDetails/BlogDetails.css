@@ -73,7 +73,7 @@
 }
 
 
-.edit-button, .delete-button {
+.edit-button, .delete-btn {
     padding: 10px 15px;
     border: none;
     cursor: pointer;
@@ -89,12 +89,12 @@
     color: white;
 }
 
-.delete-button {
+.delete-btn {
     background-color: #f44336; /* Red background */
     color: white;
 }
 
-.edit-button:hover, .delete-button:hover {
+.edit-button:hover, .delete-btn:hover {
     background-color: #333; /* Dark background for hover state */
     color: #fff;
     transform: translateY(-2px); /* Slight raise effect on hover */
@@ -102,7 +102,7 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .edit-button, .delete-button {
+    .edit-button, .delete-btn {
         padding: 8px 12px; /* Slightly smaller padding on smaller screens */
         font-size: 14px; /* Adjust font size for better readability */
     }

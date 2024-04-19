@@ -21,6 +21,9 @@ const BlogSchema = new Schema({
     tags: [{
         type: String,
     }],
+    images: [{
+        type: String, //Urls to the images
+    }],
     publishDate: {
         type: Date,
         default: Date.now,

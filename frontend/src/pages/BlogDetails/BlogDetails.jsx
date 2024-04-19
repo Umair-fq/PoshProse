@@ -59,7 +59,7 @@ const BlogDetail = () => {
                 {blog && user && blog.author._id === user._id && (
                     <>
                         <button className='edit-button' onClick={() => navigate(`/edit/${blogId}`)}>edit</button>
-                        <button className='delete-button' onClick={handleDelete}>delete</button>
+                        <button className='delete-btn' onClick={handleDelete}>delete</button>
                     </>
                 )}
 

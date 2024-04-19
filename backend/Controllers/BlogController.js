@@ -1,21 +1,32 @@
 const Blog = require('../Models/BlogModel')
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+          
+cloudinary.config({ 
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.API_KEY, 
+  api_secret:  process.env.API_SECRET,
+});
+
 
 const createBlog = async (req, res) => {
     try {
-        const { title, content, summary, tags} = req.body;
-        // console.log(`req body: ${req.body}`)
+        console.log('blog req recieved')
+        const { title, content, summary, tags, images} = req.body;
+
         if (!title || !summary || !content) {
             return res.status(400).json({ message:"Fill all the fields"});
         }
     
         // extract user id from req.user
-        const userId = req.user.user._id; // Adjust based on actual payload structure
+        const userId = req.user.user._id;
         const blog = await Blog.create({
             title,
             author: userId,
             content,
             summary,
-            tags
+            tags,
+            images,
         });
         
         if(!blog) {
@@ -71,7 +82,7 @@ const searchBlog = async(req, res) => {
 const editBlog = async (req, res) => {
     try {
         const { blogId } = req.params;
-        const { title, content, summary, tags } = req.body;
+        const { title, content, summary, tags, images } = req.body;
 
         // console.log("tags: ", tags)
 
@@ -87,8 +98,6 @@ const editBlog = async (req, res) => {
             return res.status(404).json({ message: "Blog not found" });
         }
 
-        // console.log('tags: ', tags)
-
         if(userId.toString() !== blog.author.toString()){
             return res.status(403).json({ message: "User not authorized to edit this blog" });
         }
@@ -97,6 +106,7 @@ const editBlog = async (req, res) => {
             content,
             summary,
             tags,
+            images,
         }, { new: true }).populate('author', 'username');
 
         return res.status(200).json(updatedBlog);

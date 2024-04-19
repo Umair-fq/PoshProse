@@ -7,9 +7,13 @@ const userRoutes = require('./Routers/UserRoutes')
 const blogRoutes = require('./Routers/BlogRoutes')
 const session = require('express-session');
 const passport = require('passport');
+const fileUpload = require('express-fileupload')
 require('./Middlewares/PassportSetup'); // This imports PassportSetup.js to initialize Passport configuration
 
 app.use(cors());
+app.use(fileUpload({
+  useTempFiles: true
+}))
 
 // Session middleware configuration
 app.use(session({
