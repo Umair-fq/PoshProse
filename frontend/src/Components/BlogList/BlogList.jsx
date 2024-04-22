@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 import BlogCard from '../BlogCard/BlogCard';
 import './BlogList.css'
+import LoadingIndicator from '../LoadingIndicator/LoadingIndicator';
 
 const BlogList = () => {
     const [selectedTags, setSelectedTags] = useState([]);
@@ -48,7 +49,7 @@ const BlogList = () => {
         />
         {
             isLoading ? 
-            (<div>Loading....</div>) : 
+            (<LoadingIndicator />) : 
             (
                 <div className="blog-list-container">
                     {blogs.map(blog => 

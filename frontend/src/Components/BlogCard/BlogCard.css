@@ -1,81 +1,192 @@
+/* .blog-card {
+  background-color: #f0f3f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 100%;
+  max-width: 300px;
+}
+
+.blog-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-header {
+  margin-bottom: 10px;
+}
+
+.blog-title {
+  color: #334e68;
+  margin: 0;
+}
+
+.blog-author {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.blog-image-slider {
+  margin-bottom: 10px;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.blog-summary {
+  color: #606f7b;
+  margin-bottom: 10px;
+}
+
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.blog-tag {
+  background-color: #007bff;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.read-more-link {
+  background-color: #ff4757;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.read-more-link:hover {
+  background-color: #e04050;
+}
+
+@media (max-width: 768px) {
+  .blog-card {
+    padding: 15px;
+  }
+
+  .blog-title {
+    font-size: 18px;
+  }
+
+  .blog-summary {
+    font-size: 14px;
+  }
+} */
+
 
 .blog-card {
-    background-color: #f0f3f5; 
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 30px;
-    transition: box-shadow 0.3s ease-in-out;
-    width: 300px;
-    height: 300px;
-  }
-  
-  .blog-card:hover {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .blog-header {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-bottom: 15px;
-  }
-  
-  .blog-title {
-    color: #334e68; /* Dark blue for the title */
-    margin: 0;
-  }
-  
-  .blog-author {
-    font-size: 14px;
-    color: #888; /* Light text for the author */
-    margin-top: 5px;
-  }
-  
-  .blog-summary {
-    color: #606f7b; /* Greyish tone for text */
-    margin-bottom: 15px;
-  }
-  
-  .blog-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .blog-tag {
-    background-color: #007bff; /* Bright blue for tags */
-    color: #ffffff;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 12px;
-  }
-  
-  .read-more-link {
-    background-color: #ff4757; /* Bright red for contrast */
-    color: #ffffff;
-    padding: 8px 15px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: background-color 0.2s;
-  }
-  
-  .read-more-link:hover {
-    background-color: #e04050; /* Darken on hover */
-  }
-  
-  @media (max-width: 768px) {
-    .blog-card {
-      padding: 15px;
-    }
-  
-    .blog-title {
-      font-size: 18px;
-    }
-  
-    .blog-summary {
-      font-size: 14px;
-    }
-  }
-  
+  background-color: #f0f3f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: box-shadow 0.3s ease-in-out;
+  width: 100%;
+  /* Adjusted for full responsiveness */
+  max-width: 300px;
+  /* Maximum width */
+}
+
+.blog-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-header {
+  margin-bottom: 10px;
+}
+
+.blog-title {
+  color: #334e68;
+  margin: 0;
+}
+
+.blog-author {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.blog-image-slider {
+  margin-bottom: 10px;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.blog-summary {
+  color: #606f7b;
+  margin-bottom: 10px;
+}
+
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.blog-tag {
+  background-color: #007bff;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.read-more-link {
+  background-color: #ff4757;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.read-more-link:hover {
+  background-color: #e04050;
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-prev {
+  left: 10px;
+}
+
+.custom-next {
+  right: 10px;
+}
+
+.custom-arrow i {
+  color: #334e68;
+}
+
+.custom-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}

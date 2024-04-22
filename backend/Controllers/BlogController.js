@@ -11,7 +11,6 @@ cloudinary.config({
 
 const createBlog = async (req, res) => {
     try {
-        console.log('blog req recieved')
         const { title, content, summary, tags, images} = req.body;
 
         if (!title || !summary || !content) {

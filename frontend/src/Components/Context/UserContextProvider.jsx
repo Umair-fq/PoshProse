@@ -16,7 +16,7 @@ export const UserContextProvider = ({ children }) => {
     };
 
     const fetchFavorites = () => {
-        axios.get(`http://localhost:8080/api/user/favBlogs`, {
+        axios.get(`http://localhost:8080/favBlogs`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('userToken')}`,
             },
