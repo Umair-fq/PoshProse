@@ -169,13 +169,13 @@ const removeFromFavorites = async(req, res) => {
 
 const getUserFavoriteBlogs = async (req, res) => {
     try {
-        console.log('fav blogs req received')
+        // console.log('fav blogs req received')
         const userId = req.user.user._id;
-        console.log('user id: ', userId)
+        // console.log('user id: ', userId)
         const userWithFavorites = await User.findById(userId).populate('favorites');
-        console.log('outside if user favs ', userWithFavorites)
+        // console.log('outside if user favs ', userWithFavorites)
         if (userWithFavorites && userWithFavorites.favorites.length > 0) {
-            console.log('user favs: ', userWithFavorites.favorites)
+            // console.log('user favs: ', userWithFavorites.favorites)
             return res.status(200).json(userWithFavorites.favorites);
         } else {
             res.status(404).json({ message: "No favorites found or user not found" });

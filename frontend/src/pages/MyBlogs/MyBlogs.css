@@ -1,7 +1,51 @@
 .blog-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; /* Adjust based on your design */
-    gap: 20px; /* Spacing between cards */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* Adjust based on your design */
+  gap: 20px;
+  /* Spacing between cards */
+}
+
+.myblogs-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-layout {
+  width: 100%;
+  max-width: 800px;
+  /* Adjust based on preference */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.blog-cards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Include media queries to adjust layout on smaller screens */
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: center;
   }
-  
+}

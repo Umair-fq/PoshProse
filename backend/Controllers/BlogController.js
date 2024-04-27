@@ -136,15 +136,30 @@ const editBlog = async (req, res) => {
 
     const blogsByTags = async(req, res) => {
         try{
-            const { tags } = req.query;
-            // console.log(tags)
-            // converting tags into array, splitting by comma
+            let { tags, page, limit } = req.query;
+            page = parseInt(page) || 1;
+            limit = parseInt(limit) || 10;
+            const startIndex = (page - 1) * limit;
+            // const lastIndex = (page) * limit;
+            
+            
+
             // and $in operator is used to find documents where tags field matches any of tags in the array
             const query = tags ? {tags: { $in: tags.split(',')}} : {};
-            // console.log('query: ',query)
-            const blogs = await Blog.find(query).populate('author', 'username');
-            // console.log('blogs: ', blogs)
-            return res.json(blogs)
+
+            const totalBlogs = await Blog.countDocuments(query);
+            const blogs = await Blog.find(query)
+            .populate('author', 'username')
+            .skip(startIndex)
+            .limit(limit);
+
+            const results = {
+                totalBlogs: totalBlogs,
+                pageCount: Math.ceil(totalBlogs / limit),
+                blogs: blogs
+            }
+
+            return res.json(results)
         } catch (error) {
             return res.status(500).json({ message: "Server error", error: error.message });
         }
@@ -152,10 +167,29 @@ const editBlog = async (req, res) => {
 
     const myBlogs = async(req, res) => {
         try {
+
+            let { page, limit } = req.query;
+            page = parseInt(page) || 1;
+            limit = parseInt(limit) || 5; // Set a default limit if not provided
+
+            const startIndex = (page - 1) * limit;
+
             const userId = req.user.user._id;
-            const blogs = await Blog.find({author: userId}).populate('author', 'username')
+            const blogs = await Blog.find({author: userId})
+            .populate('author', 'username')
+            .skip(startIndex)
+            .limit(limit);
+
+            const totalBlogs = await Blog.countDocuments({ author: userId });
+
+            const results = {
+                totalBlogs: totalBlogs,
+                pageCount: Math.ceil(totalBlogs / limit),
+                blogs: blogs
+            }
+
             if(blogs) {
-                return res.status(200).json(blogs);
+                return res.status(200).json(results);
             }
             else {
                 return res.status(404).json({message: "No blogs found"});

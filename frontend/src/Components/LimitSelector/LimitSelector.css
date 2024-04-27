@@ -1,0 +1,49 @@
+/* LimitSelector.css */
+.limit-selector {
+    display: flex;
+    align-items: center;
+}
+
+.limit-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.limit-select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    /* appearance: none; */
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.limit-select:hover {
+    border-color: #007bff;
+    /* Change border color on hover */
+}
+
+.limit-select:focus {
+    border-color: #007bff;
+    /* Change border color when focused */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    /* Add focus outline */
+}
+
+/* Make the select element responsive */
+@media (max-width: 768px) {
+    .limit-selector {
+        flex-direction: column;
+    }
+
+    .limit-label {
+        margin-bottom: 5px;
+    }
+
+    .limit-select {
+        width: 100%;
+    }
+}
