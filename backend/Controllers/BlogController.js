@@ -165,39 +165,45 @@ const editBlog = async (req, res) => {
         }
     }
 
-    const myBlogs = async(req, res) => {
-        try {
 
-            let { page, limit } = req.query;
+    const myBlogs = async (req, res) => {
+        try {
+            let { tags, page, limit } = req.query;
             page = parseInt(page) || 1;
             limit = parseInt(limit) || 5; // Set a default limit if not provided
-
             const startIndex = (page - 1) * limit;
 
             const userId = req.user.user._id;
-            const blogs = await Blog.find({author: userId})
-            .populate('author', 'username')
-            .skip(startIndex)
-            .limit(limit);
+            let query = { author: userId };
+            
+            // Check if tags are provided in the query
+            if (tags) {
+                query.tags = { $in: tags.split(',') };
+            }
 
-            const totalBlogs = await Blog.countDocuments({ author: userId });
+            const blogs = await Blog.find(query)
+                .populate('author', 'username')
+                .skip(startIndex)
+                .limit(limit);
+
+            const totalBlogs = await Blog.countDocuments(query);
 
             const results = {
                 totalBlogs: totalBlogs,
                 pageCount: Math.ceil(totalBlogs / limit),
                 blogs: blogs
-            }
+            };
 
-            if(blogs) {
+            if (blogs.length > 0) {
                 return res.status(200).json(results);
-            }
-            else {
-                return res.status(404).json({message: "No blogs found"});
+            } else {
+                return res.status(404).json({ message: "No blogs found" });
             }
         } catch (error) {
             return res.status(500).json({ message: "Server error", error: error.message });
         }
-    }
+};
+
     
 
 const addComment = async (req, res) => {

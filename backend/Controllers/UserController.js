@@ -9,7 +9,7 @@ const sendEmail = require('../utils/SendEmail')
 require('dotenv').config();
 
 const registerUser = async (req, res) => {
-    const {username, email, password, bio} = req.body;
+    const {username, email, password, bio, profilePicture} = req.body;
     if(!username || !email || !password) {
         // 400 Bad Request is useful for signaling that the client should modify the request before retrying.
         return res.status(400).json({ message: "All fields are required"});
@@ -31,7 +31,8 @@ const registerUser = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            bio
+            bio,
+            profilePicture
         })
         if(user) {
             
@@ -112,6 +113,8 @@ const loginUser = async (req, res) => {
                     _id: user._id,
                     username: user.username,
                     email: user.email,
+                    bio: user.bio,
+                    profilePicture: user.profilePicture
                 }
             })
         } else {

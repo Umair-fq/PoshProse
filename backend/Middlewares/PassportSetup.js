@@ -13,7 +13,7 @@ passport.use(new GoogleStrategy({
 }, async (accessToken, refreshToken, profile, done) => { // Callback function handling authentication process
     try {
         const email= profile.emails && profile.emails[0].value // Extract email from user profile if available
-        
+        const profilePicture = profile.photos && profile.photos[0].value;
         // Find or create a user based on their Google ID
         let user = await User.findOne({ googleId: profile.id });
         if (!user) {
@@ -21,6 +21,7 @@ passport.use(new GoogleStrategy({
                 username: profile.displayName,
                 email: email, // Safely access the email
                 googleId: profile.id,
+                profilePicture,
                 isVerified: true
             });
             await user.save();
@@ -32,6 +33,7 @@ passport.use(new GoogleStrategy({
                 _id: user._id,
                 username: user.username,
                 email: user.email,
+                profilePicture: user.profilePicture
             }
         }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3d' });
 

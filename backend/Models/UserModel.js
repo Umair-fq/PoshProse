@@ -23,6 +23,9 @@ const UserSchema = new Schema ({
     bio: {
         type: String,
     }, 
+    profilePicture: {
+        type: String,
+    },
     isVerified: { 
         type: Boolean, 
         default: false 

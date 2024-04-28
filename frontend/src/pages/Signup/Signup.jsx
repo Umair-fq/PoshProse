@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Signup.css'; // Make sure to update the CSS file based on the new styles provided below
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faUpload, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 
 const Signup = () => {
@@ -11,6 +11,8 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [bio, setBio] = useState('');
+    const [profilePicture, setProfilePicture] = useState(null);
+    const [isUploading, setIsUploading] = useState(false); // State for tracking uploading status of image
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [msg, setMsg] = useState("");
@@ -22,7 +24,8 @@ const Signup = () => {
             username,
             email,
             password,
-            bio
+            bio,
+            profilePicture
         }).then((res) => {
             setMsg(res.data);
             // Clear form fields by resetting state variables
@@ -30,6 +33,7 @@ const Signup = () => {
             setEmail('');
             setPassword('');
             setBio('');
+            setProfilePicture(null)
             // navigate('/login')
             // console.log('Signup Success', response.data);
         }).catch(error => {
@@ -40,6 +44,25 @@ const Signup = () => {
                 setError('An error occurred. Please try again.')
             }
         });
+    };
+
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+        console.log('file: ', file)
+        if (!file) return;
+        setIsUploading(true);
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', `${import.meta.env.VITE_PRESET_NAME}`);
+        try {
+            const response = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, formData);
+            setProfilePicture(response.data.secure_url);
+            console.log('pic uploaded to cloudinary: ', profilePicture)
+            setIsUploading(false);
+        } catch (error) {
+            console.error('Upload failed:', error);
+            setIsUploading(false);
+        }
     };
 
     return (
@@ -64,6 +87,31 @@ const Signup = () => {
                 <div className="form-group">
                     <textarea name="bio" id="bio" placeholder='Write your bio' value={bio} onChange={(e) => setBio(e.target.value)} className="form-control" />
                 </div>
+                <div className="form-group">
+                <div className="image-upload-container">
+                    {profilePicture ? (
+                        <div className="image-container">
+                            <img src={profilePicture} alt="Profile" />
+                            <button className="delete-button" onClick={() => setProfilePicture(null)}>
+                                <FontAwesomeIcon icon={faTrashAlt} />
+                            </button>
+                        </div>
+                    ) : (
+                        <>
+                            <label className="image-upload-label">
+                                <input type="file" onChange={handleImageChange} accept="image/*" style={{ display: 'none' }} />
+                                <FontAwesomeIcon icon={faUpload} className="upload-icon" />
+                            </label>
+                        </>
+                    )}
+                    {isUploading && (
+                        <div className="loading-container">
+                            <FontAwesomeIcon icon={faUpload} spin />
+                        </div>
+                    )}
+                </div>
+            </div>
+
                 <button type="submit" className="btn btn-primary">Signup</button>
                 <div className="login-redirect">
                     Already Registered?
