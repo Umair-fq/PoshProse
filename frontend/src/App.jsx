@@ -16,6 +16,8 @@ import MyFavorite from './pages/MyFavorite/MyFavorite'
 import EditComment from './Components/EditComment/EditComment'
 import AuthHandler from './Components/Auth/AuthHandler'
 import EmailVerify from './Components/EmailVerify/EmailVerify'
+import UserProfile from "./pages/UserProfile/UserProfile";
+import AuthorProfile from "./pages/AuthorProfile/AuthorProfile";
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
           <Route exact path = '/login' element = {<Login />}/>
           <Route exact path = '/signup' element = {<Signup />}/>
           <Route exact path = '/' element = {<Home />}/>
+          <Route exact path = '/profile' element = {<UserProfile />}/>
           <Route exact path = '/create' element = {<AddBlog />}/>
           <Route exact path = '/myblogs' element = {<MyBlogs />}/>
           <Route exact path = '/auth' element={<AuthHandler />} />
@@ -35,6 +38,7 @@ function App() {
           <Route exact path = '/blogs/:blogId' element = {<BlogDetails />}/>
           <Route exact path = '/edit/:blogId' element = {<EditBlog />}/>
           <Route exact path = '/:blogId/editComment/:index' element = {<EditComment />}/>
+          <Route path="/author/:authorId" element={<AuthorProfile />} />
         </Routes>
       </UserContextProvider>
     </>

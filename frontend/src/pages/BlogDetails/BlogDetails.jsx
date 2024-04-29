@@ -14,6 +14,7 @@ import LikeDisLike from '../../Components/LikeDisLike/LikeDisLike';
 import LoadingIndicator from '../../Components/LoadingIndicator/LoadingIndicator';
 import CustomPrevArrow from '../../Components/CustomArrows/CustomPrevArrow'
 import CustomNextArrow from '../../Components/CustomArrows/CustomNextArrow';
+import BackButton from '../../Components/BackButton/BackButton';
 
 const BlogDetail = () => {
     const [blog, setBlog] = useState(null);
@@ -62,6 +63,7 @@ const settings = {
         
         <>
             <Navbar />
+            <BackButton />
             {
                 loading ? <LoadingIndicator /> : (
                     <>
@@ -69,7 +71,10 @@ const settings = {
                         <header className="blog-header">
                             <h1 className="blog-title">{blog.title}</h1>
                             <div className="blog-meta">
-                                <span className="blog-author">By {blog.author.username}</span> {/* Assuming you have the author's username */}
+                                {/* <span className="blog-author">By {blog.author.username}</span> */}
+                                <button onClick={() => navigate(`/author/${blog.author._id}`)} style={{ background: 'none', border: 'none', padding: 0, color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>
+                                   By {blog.author.username}
+                                </button>
                                 <span className="blog-date">{new Date(blog.publishDate).toLocaleDateString()}</span>
                             </div>
                             <div className="blog-tags">

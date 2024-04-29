@@ -33,7 +33,8 @@ passport.use(new GoogleStrategy({
                 _id: user._id,
                 username: user.username,
                 email: user.email,
-                profilePicture: user.profilePicture
+                profilePicture: user.profilePicture,
+                isPublicProfile: user.isPublicProfile,
             }
         }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3d' });
 

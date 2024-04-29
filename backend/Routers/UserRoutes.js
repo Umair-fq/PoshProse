@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser, loginUser, addToFavorites, removeFromFavorites, getUserFavoriteBlogs, verifyEmailToken } = require('../Controllers/UserController');
+const { registerUser, loginUser, addToFavorites, removeFromFavorites, getUserFavoriteBlogs, verifyEmailToken, updateProfile, getAuthor } = require('../Controllers/UserController');
 const { authenticateToken } = require('../Middlewares/Auth');
 const router = express.Router();
 const passport = require('passport')
@@ -20,10 +20,11 @@ router.get('/auth/google/callback',
     res.redirect(`http://localhost:5173/auth?token=${encodeURIComponent(token)}&email=${encodeURIComponent(user.email)}&username=${encodeURIComponent(user.username)}&id=${encodeURIComponent(user._id)}`);
   });
 
-
+router.get('/blog/author/:authorId', getAuthor)
 router.get('/favBlogs', authenticateToken, getUserFavoriteBlogs)
 router.put('/addToFav/:blogId', authenticateToken, addToFavorites)
 router.put('/remFromFav/:blogId', authenticateToken, removeFromFavorites)
 router.get('/verify/:token/:id', verifyEmailToken)
+router.patch('/update/userprofile/:id', authenticateToken, updateProfile)
 
 module.exports = router;

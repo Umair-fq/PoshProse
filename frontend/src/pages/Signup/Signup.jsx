@@ -48,7 +48,6 @@ const Signup = () => {
 
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
-        console.log('file: ', file)
         if (!file) return;
         setIsUploading(true);
         const formData = new FormData();
@@ -57,7 +56,6 @@ const Signup = () => {
         try {
             const response = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, formData);
             setProfilePicture(response.data.secure_url);
-            console.log('pic uploaded to cloudinary: ', profilePicture)
             setIsUploading(false);
         } catch (error) {
             console.error('Upload failed:', error);

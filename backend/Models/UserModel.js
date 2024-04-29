@@ -26,6 +26,10 @@ const UserSchema = new Schema ({
     profilePicture: {
         type: String,
     },
+    isPublicProfile: {
+        type: Boolean,
+        default: true,
+    },
     isVerified: { 
         type: Boolean, 
         default: false 

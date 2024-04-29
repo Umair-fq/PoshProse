@@ -114,7 +114,8 @@ const loginUser = async (req, res) => {
                     username: user.username,
                     email: user.email,
                     bio: user.bio,
-                    profilePicture: user.profilePicture
+                    profilePicture: user.profilePicture,
+                    isPublicProfile: user.isPublicProfile,
                 }
             })
         } else {
@@ -124,6 +125,40 @@ const loginUser = async (req, res) => {
         return res.status(401).json({message: "Invalid credentials"})
     }
 }
+
+
+const updateProfile = async (req, res) => {
+    try {
+        const { username, bio, profilePicture, isPublicProfile } = req.body;
+        const userId = req.user.user._id;
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({ message: "User does not exist" });
+        }
+        
+        if (!username) {
+            return res.status(400).json({ message: "Username field is required" });
+        }
+        
+        const updatedUser = await User.updateOne(
+            { _id: userId },
+            { $set: { username, bio, profilePicture, isPublicProfile } }
+        );
+        
+        if (updatedUser.nModified === 0) {
+            // Handle if no document was modified (user data remained unchanged)
+            return res.status(200).json({ message: "User data remains unchanged" });
+        }
+        
+        // Fetch the updated user data after the update
+        const updatedUserData = await User.findById(userId);
+        // console.log('user ', updatedUserData);
+        return res.status(200).json({ message: "User profile updated successfully", user: updatedUserData });
+    } catch (error) {
+        return res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
 
 
 const addToFavorites = async(req, res) => {
@@ -187,4 +222,25 @@ const getUserFavoriteBlogs = async (req, res) => {
         return res.status(500).json({error: error.message});
     }
 }
-module.exports = { registerUser, loginUser, addToFavorites, removeFromFavorites, getUserFavoriteBlogs, verifyEmailToken }
+
+
+const getAuthor = async(req, res) => {
+    try{
+        const { authorId } = req.params;
+        let user = await User.findById(authorId);
+        if(!user) {
+            return res.status(404).json({message: "User not found"})
+        }
+        user = {    
+                    username: user.username,
+                    email: user.email,
+                    bio: user.bio,
+                    profilePicture: user.profilePicture,
+                    isPublicProfile: user.isPublicProfile,
+                }
+        return res.status(200).json({user})
+    } catch(error) {
+        return res.status(500).json({error: error.message});
+    }
+}
+module.exports = { registerUser, loginUser, addToFavorites, removeFromFavorites, getUserFavoriteBlogs, verifyEmailToken, updateProfile, getAuthor }
